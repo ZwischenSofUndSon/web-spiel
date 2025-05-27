@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aktivities</title>
+    <link rel="stylesheet" href="/static/styles/activities.css">
+</head>
+<body>
+   <div class="menu">
+        <h2>Sport</h2>
+    
+       <form class="sport-table" method="POST" action="insertNewAktivities">
+           <div>
+                <label>Schritte:</label>
+                <input type="number" name="schritte">
+           </div>
+           <div>
+                <label>Schlafindex:</label>
+                <input type="number" name="schlafindex">
+           </div>
+            <div>
+                <label>Bicepscurl(kg):</label>
+                <input type="number" name="bizeps">
+            </div>
+            <div>
+                <label>Kreuzheben(kg):</label>
+                <input type="number" name="kreuzheben">
+            </div>
+            <div>
+                <label>Cable Crossover(kg):</label>
+                <input type="number" name="crossover">
+            </div>
+            <div>
+                <label>Bankdrüken(kg):</label>
+                <input type="number" name="bankdrucken">
+            </div>
+            <div>
+                <label>Schwimmen(m)</label>
+                <input type="number" name="schwimmen">
+            </div>
+            <input class="submit-button" type="submit" value="Speichern">
+       </form>
+   </div>
+</body>
+</html>
