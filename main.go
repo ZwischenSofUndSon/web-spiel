@@ -95,10 +95,6 @@ func insertNewAktivities(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		return
 	}
-	err := r.ParseForm()
-	if err != nil {
-		panic(err)
-	}
 	schritte := r.FormValue("schritte")
 	schlafindex := r.FormValue("schlafindex")
 	bizeps := r.FormValue("bizeps")
@@ -110,9 +106,9 @@ func insertNewAktivities(w http.ResponseWriter, r *http.Request) {
 	sliceAktivities = append(sliceAktivities, schlafindex, kreuzheben, bizeps, crossover, bankdrucken, schwimmen, schritte)
 	
     
-	for _, v := range sliceAktivities{
-		value := mustToInt(v)
-	 _, err := database.Exec("UPDATE `players`.`players_stats` SET `money` = 'money + ?' WHERE (`id` = '1');", value)
+	for k, v := range sliceAktivities{
+		value := mustToInt(v, k)
+	 _, err := database.Exec("UPDATE players.players_stats SET money = money + ? WHERE id = 1;", value)
 	 if err != nil {
 		fmt.Println("Error, cant insert values into database")
 		panic(err)
@@ -122,11 +118,31 @@ func insertNewAktivities(w http.ResponseWriter, r *http.Request) {
 }
 
 
-func mustToInt(s string) int {
-	i, err := strconv.Atoi(s)
-	if err != nil {
-		fmt.Println("Error, cant convert Sting to Int(Aktivities)")
-		panic(err)
+func mustToInt(s string, k int) int {
+	if s != "" {
+		i, err := strconv.Atoi(s)
+		if err != nil {
+			fmt.Println("Error, cant convert Sting to Int(Aktivities)")
+			panic(err)
+		}
+	switch k {
+		case 0: //schlafindex
+		i = i * 100
+		case 1: //kreuzheben
+		i = i * 3
+		case 2: //bizeps
+		i = i * 3
+		case 3: //crossover
+		i = i * 3
+		case 4: //bankdrucken
+		i = i * 3
+		case 5: //schwimmen
+		i = i * 3
+		case 6: //schritte
+			i = i * 1
+		
 	}
 	return i
+   }else {return 0}
+   
 }
